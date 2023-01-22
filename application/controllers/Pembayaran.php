@@ -3,6 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pembayaran extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		// load library session 
+		$this->load->library('session');
+		// validasi ketika tidak ada session login
+		// maka redirect ke login
+		if (empty($this->session->userdata('level')))
+			redirect('login');
+	}
+
 	public function index()
 	{
 		$nisn = $this->input->get('cari');
@@ -13,7 +24,6 @@ class Pembayaran extends CI_Controller {
 		$this->load->view('layouts/sidebar');
 		$this->load->view('admin/pembayaran/data_pembayaran',$data);
 		$this->load->view('layouts/footer');
-		// var_dump($data['siswa']);
 	}
 
 	public function create()

@@ -3,6 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class DataTunggakan extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		// load library session 
+		$this->load->library('session');
+		// validasi ketika tidak ada session login
+		// maka redirect ke login
+		if (empty($this->session->userdata('level')))
+			redirect('login');
+	}
+
 	public function index()
 	{
 		$data['title'] = 'Data Tunggakan';
@@ -35,17 +46,6 @@ class DataTunggakan extends CI_Controller {
 			'bulan' => $bulan, 
 			'tahun' => $tahun, 
 		);
-
-		// $tunggakan = $this->M_tunggakan->tambah($data);
-		// $pembayaran = $this->M_tunggakan->get_one($nama)->row();
-		// $nisn = $pembayaran->nisn;
-
-		// $data = array(
-		// 	'nisn' => $nama, 
-		// 	'id_petugas' => $this->session->userdata('id_petugas'), 
-		// 	'bulan' => $bulan, 
-		// 	'tahun' => $tahun, 
-		// );
 
 		redirect('data-tunggakan');
 	}

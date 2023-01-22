@@ -3,6 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Laporan extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		// load library session 
+		$this->load->library('session');
+		// validasi ketika tidak ada session login
+		// maka redirect ke login
+		if (empty($this->session->userdata('level')))
+			redirect('login');
+	}
+
 	public function index()
 	{
 		$data['title'] = 'Laporan';

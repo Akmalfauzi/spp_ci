@@ -3,6 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class DataPetugas extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		// load library session 
+		$this->load->library('session');
+		// validasi ketika tidak ada session login
+		// maka redirect ke login
+		if (empty($this->session->userdata('level')))
+			redirect('login');
+	}
+
 	public function index()
 	{
 		$data['title'] = 'Data Petugas';
@@ -54,15 +65,6 @@ class DataPetugas extends CI_Controller {
 		$this->load->view('layouts/sidebar');
 		$this->load->view('admin/data_petugas/edit_petugas',$data);
 		$this->load->view('layouts/footer');
-
-		// $row = $data['petugas'];
-
-		// $sess_admin = array(
-		// 		'id_petugas' => $row->id_petugas, 
-		// 		'username' => $row->username, 
-		// 		'level' => $row->level, 
-		// 	);
-		// $this->session->set_userdata($sess_admin);
 	}
 
 	public function update($id)
@@ -100,7 +102,6 @@ class DataPetugas extends CI_Controller {
 		}else{
 			$pesan = $this->session->set_flashdata('gagal', 'Data gagal diperbaharui!');
 		}
-		// var_dump($pass);
 
 		redirect('data-petugas');
 	}

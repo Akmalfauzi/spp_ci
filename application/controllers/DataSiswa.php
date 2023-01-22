@@ -3,6 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class DataSiswa extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		// load library session 
+		$this->load->library('session');
+		// validasi ketika tidak ada session login
+		// maka redirect ke login
+		if (empty($this->session->userdata('level')))
+			redirect('login');
+	}
+
 	public function index()
 	{
 		$data['title'] = 'Data Siswa';
@@ -90,14 +101,7 @@ class DataSiswa extends CI_Controller {
 				$pesan = $this->session->set_flashdata('gagal', 'Data gagal ditambahkan!');
 			}
 			redirect('data-siswa');
-        }
-		// $cek_nisn = $this->M_siswa->cek_nisn($nisn);
-
-			
-
-			// var_dump($data);
-
-		
+        }		
 
 	}
 
@@ -173,8 +177,7 @@ class DataSiswa extends CI_Controller {
 			}else{
 				$pesan = $this->session->set_flashdata('gagal', 'Data gagal diperbaharui!');
 			}
-		}
-		
+		}		
 
 		redirect('data-siswa');
 	}

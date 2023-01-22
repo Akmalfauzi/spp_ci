@@ -7,12 +7,6 @@
 					<div class="col-sm-6">
 						<h1></h1>
 					</div>
-				<!-- 	<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">General Form</li>
-						</ol>
-					</div> -->
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
@@ -31,8 +25,7 @@
 							<!-- /.card-header -->
 							<!-- form start -->
 							<form role="form" action="<?php echo base_url('datasiswa/update/'.$siswa->nisn) ?>" method="POST">
-								<div class="card-body">
-		
+								<div class="card-body">		
 
 									<div class="form-group">
 										<label for="exampleInputEmail1">NISN</label>
